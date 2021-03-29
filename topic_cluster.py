@@ -14,6 +14,7 @@ from utils import nearest_neighbors, get_topic_coherence, get_topic_diversity
 import data
 from collections import defaultdict
 
+
 nltk.download('stopwords')
 
 stopword = set(stopwords.words('english'))
@@ -241,12 +242,8 @@ def process_data(corpus_path, path_save, max_df=0.9, min_df=1):
   return path_save
 
 
-def train(data_path, save_path, embeddings_path, num_topics, epochs=1000):
-    command = 'python main.py --mode train --dataset {data_path} --data_path {data_path} --emb_path {emb_path} --num_topics {num_topics} --train_embeddings 0 --epochs {epochs}'.format(data_path=data_path, save_path=save_path, emb_path=embeddings_path, num_topics=num_topics, epochs=epochs)
-    os.system(command)
-
 def get_average_vector(words):
-      word_vectors = []
+  word_vectors = []
   for word in words:
     if word in vocab and word not in stopword:
       index = vocab.index(word)
@@ -272,7 +269,7 @@ def get_topic_distances(topic_vectors, sentence):
     similarity = 1 - spatial.distance.cosine(topic_vector, sent_vec)
     topic_similarities.append(similarity)
   return topic_similarities
-from collections import defaultdict
+
  
 def cluster_document(path, num_topics):
   docs = []
